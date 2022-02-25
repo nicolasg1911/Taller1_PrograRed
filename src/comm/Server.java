@@ -29,19 +29,17 @@ public class Server extends Thread{
 	@Override
 	public void run() {
 		try {
-			
 			server = new ServerSocket(puerto);
-			System.out.println("Esperando un cliente");
+			
 			while(true) {
+			System.out.println("Esperando un cliente");
 			socket = server.accept();
 			System.out.println("Cliente conectado");
 			InputStream is = socket.getInputStream();
 			BufferedReader breader = new BufferedReader(new InputStreamReader(is));
-			
 			OutputStream os = socket.getOutputStream();
 			OutputStreamWriter osw = new OutputStreamWriter(os);
 			BufferedWriter bwriter = new BufferedWriter(osw) ;
-			
 				String msg = breader.readLine();
 				System.out.println(msg);
 				if(msg.equalsIgnoreCase("whatTimeIsIt")) {
@@ -66,11 +64,10 @@ public class Server extends Thread{
 					bwriter.write(macAddress+"\n");
                     bwriter.flush();
 				}else {
-					System.out.println(msg);
 					bwriter.write(msg+"\n");
 					bwriter.flush();
 				}
-		
+			
 			}
 		}catch(IOException ex) {
 			
